@@ -53,7 +53,10 @@ class TestShow(unittest.TestCase):
 
     def test_1(self):
         Student.select().show()
-        self.assertEqual('\n'+sys.stdout.getvalue().replace(' ', '~'), '''
+        txt = sys.stdout.getvalue().replace(' ', '~')
+        txt = txt[txt.index('id|'):]
+
+        self.assertEqual('\n'+txt, '''
 id|name|scholarship|gpa|dob~~~~~~~|group~~~
 --+----+-----------+---+----------+--------
 1~|S1~~|None~~~~~~~|3.1|None~~~~~~|Group[1]
@@ -63,7 +66,9 @@ id|name|scholarship|gpa|dob~~~~~~~|group~~~
 
     def test_2(self):
         Group.select().show()
-        self.assertEqual('\n'+sys.stdout.getvalue().replace(' ', '~'), '''
+        txt = sys.stdout.getvalue().replace(' ', '~')
+        txt = txt[txt.index('number\n'):]
+        self.assertEqual('\n'+txt, '''
 number
 ------
 1~~~~~
